@@ -1,12 +1,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=openmanetd
-PKG_VERSION:=1.2.27
+PKG_VERSION:=1.7.0-dev
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/OpenMANET/openmanetd
-PKG_SOURCE_VERSION:=$(PKG_VERSION)
+PKG_SOURCE_VERSION:=deps/net-x-0.52.0
 PKG_HASH:=skip
 
 PKG_LICENSE:=MIT
