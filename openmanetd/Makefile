@@ -57,9 +57,9 @@ define Package/openmanetd/conffiles
 endef
 
 define Package/openmanetd/install
-	# Strip and upx the binary if we're building for mipsel
-	# This will compress the binary on mipsel hardware
-	if [ "$(GOARCH)" = "mipsle" ]; then \
+	# UPX compress the binary on storage-limited architectures.
+	# $(GOARCH) is not a Make variable in this context — use $(CONFIG_ARCH) instead.
+	if [ "$(CONFIG_ARCH)" = "mipsel" ]; then \
 		upx --lzma --best $(GO_PKG_BUILD_BIN_DIR)/$(PKG_NAME) || true; \
 	fi
 

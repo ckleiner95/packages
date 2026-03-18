@@ -56,8 +56,10 @@ endef
 
 define Package/tailscale/install
 	$(INSTALL_DIR) $(1)/usr/sbin $(1)/etc/init.d $(1)/etc/config
-	if [ "$(GOARCH)" = "mipsle" ]; then \
-		upx --lzma --best $(GO_PKG_BUILD_BIN_DIR)/$(PKG_NAME) || true; \
+	# UPX compress the binary on storage-limited architectures.
+	# $(GOARCH) is not a Make variable in this context — use $(CONFIG_ARCH) instead.
+	if [ "$(CONFIG_ARCH)" = "mipsel" ]; then \
+		upx --lzma --best $(GO_PKG_BUILD_BIN_DIR)/tailscaled || true; \
 	fi
 	$(INSTALL_BIN) $(GO_PKG_BUILD_BIN_DIR)/tailscaled $(1)/usr/sbin
 	$(LN) tailscaled $(1)/usr/sbin/tailscale
