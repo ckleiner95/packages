@@ -56,7 +56,7 @@ define Package/openmanetd/conffiles
 endef
 
 define Package/openmanetd/install
-  ifdef CONFIG_UPX_GO_BINARIES
+  ifeq ($(CONFIG_ARCH),mipsel)
 	upx --lzma --best $(GO_PKG_BUILD_BIN_DIR)/openmanetd || true
   endif
 	$(call GoPackage/Package/Install/Bin,$(1))
